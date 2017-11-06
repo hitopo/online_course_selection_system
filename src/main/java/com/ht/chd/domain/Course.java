@@ -13,7 +13,7 @@ public class Course {
     //学分
     private int credit;
     //课程描述
-    private String desc;
+    private String description;
 
     public int getId() {
         return id;
@@ -47,12 +47,12 @@ public class Course {
         this.credit = credit;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Course {
                 ", name='" + name + '\'' +
                 ", hour=" + hour +
                 ", credit=" + credit +
-                ", desc='" + desc + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

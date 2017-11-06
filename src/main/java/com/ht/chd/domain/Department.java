@@ -9,7 +9,7 @@ public class Department {
     //院系名称
     private String name;
     //院系描述
-    private String desc;
+    private String description;
     //联系电话
     private String phone;
 
@@ -29,12 +29,12 @@ public class Department {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPhone() {
@@ -45,12 +45,13 @@ public class Department {
         this.phone = phone;
     }
 
+
     @Override
     public String toString() {
         return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", desc='" + desc + '\'' +
+                ", description='" + description + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
     }
