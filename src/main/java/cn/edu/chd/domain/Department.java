@@ -1,4 +1,4 @@
-package com.ht.chd.domain;
+package cn.edu.chd.domain;
 
 /**
  * 院系实体类

@@ -1,7 +1,7 @@
-package com.ht.chd.dao;
+package cn.edu.chd.dao;
 
-import com.ht.chd.domain.Department;
-import org.apache.ibatis.javassist.ClassPath;
+import cn.edu.chd.domain.Department;
+import cn.edu.chd.domain.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -24,7 +24,10 @@ public class DepartmentDaoTest {
     private DepartmentDao departmentDao;
     @Test
     public void getAllDepartment() throws Exception {
-        List<Department> departments = departmentDao.getAllDepartment();
+        int totalCount = departmentDao.getCount();
+        Page page = new Page(2,2,totalCount);
+        logger.info("分页对象:{}",page);
+        List<Department> departments = departmentDao.getAllDepartment(page);
         for (Department department :departments) {
             logger.info("院系:{}",department);
         }
@@ -43,7 +46,8 @@ public class DepartmentDaoTest {
         department.setName("汽车学院");
         department.setPhone("19029863468");
         department.setDescription("汽车学院是最好的学院");
-        departmentDao.insertDepartment(department);
+        int result = departmentDao.insertDepartment(department);
+        logger.info("插入影响的行数是：{}",result);
     }
 
     @Test
@@ -52,13 +56,15 @@ public class DepartmentDaoTest {
         department.setName("汽车学院");
         department.setPhone("19029863468");
         department.setDescription("汽车学院牛批");
-        departmentDao.updateDepartment(department);
+        int result = departmentDao.updateDepartment(department);
+        logger.info("更新影响的行数是：{}",result);
     }
 
     @Test
     public void deleteDepartment() throws Exception {
-        int id = 1;
-        departmentDao.deleteDepartment(id);
+        int id = 5;
+        int result = departmentDao.deleteDepartment(id);
+        logger.info("删除影响的行数是：{}",result);
     }
 
 }

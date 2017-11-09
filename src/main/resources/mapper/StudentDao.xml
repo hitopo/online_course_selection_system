@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.chd.dao.StudentDao">
+    <!--todo 这里面的学生选择的课程也应该包括在字段中，先不写-->
+    <!--courses属性应该被赋值-->
+    <!--授课逻辑被包含在instructionDao中-->
+    <select id="getAllStudent" resultType="Student">
+        SELECT
+            s.student_id       AS id,
+            s.student_name     AS name,
+            s.student_gender   AS gender,
+            s.student_birthday AS birthday,
+            s.student_email    AS email,
+            s.student_password AS password,
+            s.dept_id          AS "department.id",
+            d.dept_name        AS "department.name",
+            d.dept_phone       AS "department.phone",
+            d.dept_desc        AS "department.description"
+        FROM tb_student s
+            LEFT JOIN tb_dept d ON s.dept_id = d.dept_id
+        LIMIT #{startIndex},#{pageSize};
+    </select>
+    <select id="getStudentById" resultType="Student">
+        SELECT
+            s.student_id       AS id,
+            s.student_name     AS name,
+            s.student_gender   AS gender,
+            s.student_birthday AS birthday,
+            s.student_email    AS email,
+            s.student_password AS password,
+            s.dept_id          AS "department.id",
+            d.dept_name        AS "department.name",
+            d.dept_phone       AS "department.phone",
+            d.dept_desc        AS "department.description"
+        FROM tb_student s
+            LEFT JOIN tb_dept d ON s.dept_id = d.dept_id
+        WHERE s.student_id = #{id};
+    </select>
+    <insert id="insertStudent" parameterType="Student">
+        INSERT INTO tb_student (
+            student_name, student_gender, student_birthday, student_email, student_password, dept_id
+        )
+        VALUES (
+            #{name}, #{gender}, #{birthday}, #{email}, #{password}, #{department.id}
+        );
+    </insert>
+    <update id="updateStudent" parameterType="student">
+        UPDATE tb_student
+        SET student_name     = #{name},
+            student_gender   = #{gender},
+            student_birthday = #{birthday},
+            student_email    = #{email},
+            student_password = #{password},
+            dept_id          = #{department.id}
+        WHERE student_id = #{id};
+    </update>
+    <delete id="deleteStudent">
+        DELETE FROM tb_student
+        WHERE student_id = #{id};
+    </delete>
+    <select id="getCount" resultType="int">
+        SELECT count(*)
+        FROM tb_student;
+    </select>
+</mapper>

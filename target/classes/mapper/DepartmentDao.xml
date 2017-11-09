@@ -5,13 +5,14 @@
 
 <mapper namespace="com.ht.chd.dao.DepartmentDao">
     <!--获取所有院系信息-->
-    <select id="getAllDepartment" resultType="Department">
+    <select id="getAllDepartment" parameterType="Page" resultType="Department">
         SELECT
             dept_id    AS id,
             dept_name  AS name,
             dept_phone AS phone,
             dept_desc  AS description
         FROM tb_dept
+        LIMIT #{startIndex},#{pageSize}
     </select>
     <!--由id获取院系信息-->
     <select id="getDepartmentById" resultType="Department">
@@ -27,13 +28,18 @@
         INSERT INTO tb_dept (dept_name, dept_phone, dept_desc)
         VALUES (
             #{name}, #{phone}, #{description}
-        )
+        );
     </insert>
     <update id="updateDepartment" parameterType="Department">
         UPDATE tb_dept
         SET dept_name = #{name}, dept_phone = #{phone}, dept_desc = #{description}
     </update>
     <delete id="deleteDepartment">
-        DELETE FROM tb_dept WHERE dept_id = #{id}
+        DELETE FROM tb_dept
+        WHERE dept_id = #{id};
     </delete>
+    <select id="getCount" resultType="int">
+        SELECT count(*)
+        FROM tb_dept;
+    </select>
 </mapper>

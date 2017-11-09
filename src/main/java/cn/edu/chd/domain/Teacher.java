@@ -1,4 +1,6 @@
-package com.ht.chd.domain;
+package cn.edu.chd.domain;
+
+import java.util.List;
 
 public class Teacher {
     //工号
@@ -17,6 +19,8 @@ public class Teacher {
     private Department department;
     //职称
     private String title;
+    //所教课程
+    private List<Course> courses;
 
     public int getId() {
         return id;
@@ -82,6 +86,14 @@ public class Teacher {
         this.title = title;
     }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +
@@ -93,6 +105,7 @@ public class Teacher {
                 ", password='" + password + '\'' +
                 ", department=" + department +
                 ", title='" + title + '\'' +
+                ", courses=" + courses +
                 '}';
     }
 }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.chd.dao.TeacherDao">
+    <!--todo 这里面的老师教授的课程也应该包括在字段中，先不写-->
+    <!--courses属性应该被赋值-->
+    <!--授课逻辑被包含在selectionDao中-->
+    <select id="getAllTeacher" resultType="Teacher">
+        SELECT
+            t.teacher_id       AS id,
+            t.teacher_name     AS name,
+            t.teacher_gender   AS gender,
+            t.teacher_birthday AS birthday,
+            t.teacher_email    AS email,
+            t.teacher_password AS password,
+            t.teacher_title    AS title,
+            t.dept_id          AS "department.id",
+            d.dept_name        AS "department.name",
+            d.dept_phone       AS "department.phone",
+            d.dept_desc        AS "department.description"
+        FROM tb_teacher t
+            LEFT JOIN tb_dept d ON t.dept_id = d.dept_id
+    </select>
+    <select id="getTeacherById" resultType="Teacher">
+        SELECT
+            t.teacher_id       AS id,
+            t.teacher_name     AS name,
+            t.teacher_gender   AS gender,
+            t.teacher_birthday AS birthday,
+            t.teacher_email    AS email,
+            t.teacher_password AS password,
+            t.teacher_title    AS title,
+            t.dept_id          AS "department.id",
+            d.dept_name        AS "department.name",
+            d.dept_phone       AS "department.phone",
+            d.dept_desc        AS "department.description"
+        FROM tb_teacher t
+            LEFT JOIN tb_dept d ON t.dept_id = d.dept_id
+        WHERE t.teacher_id = #{id}
+        LIMIT #{startIndex},#{pageSize};
+    </select>
+    <insert id="insertTeacher" parameterType="Teacher">
+        INSERT INTO tb_teacher (
+            teacher_name, teacher_gender, teacher_birthday, teacher_email, teacher_password, teacher_title, dept_id
+        )
+        VALUES (
+            #{name}, #{gender}, #{birthday}, #{email}, #{password}, #{title}, #{department.id}
+        );
+    </insert>
+    <update id="updateTeacher" parameterType="Teacher">
+        UPDATE tb_teacher
+        SET teacher_name     = #{name},
+            teacher_gender   = #{gender},
+            teacher_birthday = #{birthday},
+            teacher_email    = #{email},
+            teacher_password = #{password},
+            teacher_title    = #{title},
+            dept_id          = #{department.id}
+        WHERE teacher_id = #{id};
+    </update>
+    <delete id="deleteTeacher">
+        DELETE FROM tb_teacher
+        WHERE teacher_id = #{id};
+    </delete>
+    <select id="getCount" resultType="int">
+    SELECT count(*)
+    FROM tb_teacher;
+</select>
+</mapper>
+
+

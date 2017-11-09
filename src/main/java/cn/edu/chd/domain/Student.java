@@ -1,4 +1,6 @@
-package com.ht.chd.domain;
+package cn.edu.chd.domain;
+
+import java.util.List;
 
 /**
  * 学生实体类
@@ -18,6 +20,8 @@ public class Student {
     private String password;
     //所在院系
     private Department department;
+    //所选课程
+    private List<Course> courses;
 
     public int getId() {
         return id;
@@ -75,6 +79,14 @@ public class Student {
         this.department = department;
     }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -85,6 +97,7 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", department=" + department +
+                ", courses=" + courses +
                 '}';
     }
 }

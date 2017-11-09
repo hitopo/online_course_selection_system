@@ -1,4 +1,4 @@
-package com.ht.chd.domain;
+package cn.edu.chd.domain;
 
 /**
  * 课程实体类
@@ -11,7 +11,7 @@ public class Course {
     //学时
     private int hour;
     //学分
-    private int credit;
+    private float credit;
     //课程描述
     private String description;
 
@@ -39,11 +39,11 @@ public class Course {
         this.hour = hour;
     }
 
-    public int getCredit() {
+    public float getCredit() {
         return credit;
     }
 
-    public void setCredit(int credit) {
+    public void setCredit(float credit) {
         this.credit = credit;
     }
 

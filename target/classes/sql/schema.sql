@@ -35,7 +35,7 @@ CREATE TABLE tb_student (
   COMMENT '学生生日',
   student_email    VARCHAR(30) NOT NULL
   COMMENT '学生邮箱',
-  student_password VARCHAR(20) NOT NULL
+  student_password CHAR(32) NOT NULL
   COMMENT '登录密码',
   dept_id          INT         NOT NULL
   COMMENT '所在院系',
@@ -59,7 +59,7 @@ CREATE TABLE tb_teacher (
   COMMENT '教师生日',
   teacher_email    VARCHAR(30) NOT NULL
   COMMENT '教师邮箱',
-  teacher_password VARCHAR(20) NOT NULL
+  teacher_password CHAR(32) NOT NULL
   COMMENT '登录密码',
   teacher_title    VARCHAR(10) NOT NULL
   COMMENT '职称',
@@ -79,7 +79,7 @@ CREATE TABLE tb_admin (
   COMMENT '管理员工号',
   admin_name     VARCHAR(20) NOT NULL
   COMMENT '管理员名称',
-  admin_password VARCHAR(20) NOT NULL
+  admin_password CHAR(32) NOT NULL
   COMMENT '登录密码',
   PRIMARY KEY (admin_id),
   KEY idx_admin_id(admin_id)
@@ -108,17 +108,17 @@ CREATE TABLE tb_course (
   COMMENT '课程表';
 
 # 授课表
-CREATE TABLE tb_instruct (
-  instruct_id INT NOT NULL AUTO_INCREMENT
+CREATE TABLE tb_instruction (
+  instruction_id INT NOT NULL AUTO_INCREMENT
   COMMENT '授课id',
   teacher_id  INT NOT NULL
   COMMENT '教师工号',
   course_id   INT NOT NULL
   COMMENT '课程号',
-  PRIMARY KEY (instruct_id),
+  PRIMARY KEY (instruction_id),
   FOREIGN KEY (teacher_id) REFERENCES tb_teacher (teacher_id),
   FOREIGN KEY (course_id) REFERENCES tb_course (course_id),
-  KEY idx_instruct_id(instruct_id)
+  KEY idx_instruct_id(instruction_id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET utf8

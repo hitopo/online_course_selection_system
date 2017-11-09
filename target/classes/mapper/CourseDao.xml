@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ht.chd.dao.CourseDao">
+    <select id="getAllCourse" resultType="Course">
+        SELECT
+            course_id     AS id,
+            course_name   AS name,
+            course_hour   AS hour,
+            course_credit AS credit,
+            course_desc   AS description
+        FROM tb_course;
+    </select>
+    <select id="getCourseById" resultType="Course">
+        SELECT
+            course_id     AS id,
+            course_name   AS name,
+            course_hour   AS hour,
+            course_credit AS credit,
+            course_desc   AS description
+        FROM tb_course
+        WHERE course_id = #{id};
+    </select>
+    <insert id="insertCourse" parameterType="Course">
+        INSERT INTO tb_course (course_name, course_hour, course_credit, course_desc)
+        VALUES (
+            #{name}, #{hour}, #{credit}, #{description}
+        );
+    </insert>
+    <update id="updateCourse" parameterType="Course">
+        UPDATE tb_course
+        SET course_name   = #{name},
+            course_hour   = #{hour},
+            course_credit = #{credit},
+            course_desc   = #{description}
+        WHERE course_id = #{id};
+    </update>
+    <delete id="deleteCourse">
+        DELETE FROM tb_course
+        WHERE course_id = #{id};
+    </delete>
+</mapper>
